@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: MainActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,19 +59,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         //searchview
-//        binding = MainActivity.inflate(layoutInflater)
-//        setContentView(binding.root)
-//        binding.searchvw.setOnQueryTextListener(object : OnQueryTextListener{
-//            override fun OnQueryTextSubmit(query: String?): Boolean {
-//                lvAdapter.getFilter().filter(query)
-//                return false
-//            }
-//
-//            override fun OnQueryTextChange(newText: String?) {} Boolean {
-//                lvAdapter.getFilter().filter(newText)
-//                return false
-//            }
-//        })
+        val searchView = findViewById<SearchView>(R.id.searchvw)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                lvAdapter.getFilter().filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lvAdapter.getFilter().filter(newText)
+                return false
+            }
+        })
 
     }
 }
